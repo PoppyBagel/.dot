@@ -1,7 +1,8 @@
 (require 'package)
 (setcdr (last package-archives)
 	'(("marmalade" . "http://marmalade-repo.org/packages/")
-	  ("melpa" . "http://melpa.org/packages/")))
+	  ("melpa" . "http://melpa.org/packages/")
+	  ("elpy" . "https://jorgenschaefer.github.io/packages/")))
 
 (package-initialize)
 
@@ -9,18 +10,36 @@
   (package-refresh-contents))
 
 (dolist
-    (pkg '(evil
+    (pkg '(conda
+	   elpy
+	   evil
 	   evil-args
 	   evil-matchit
 	   evil-nerd-commenter
 	   evil-surround
+	   flycheck
 	   multiple-cursors
-	   neotree))
+	   neotree
+	   py-autopep8
+	   py-import-check))
   (unless (package-installed-p pkg)
     (package-install pkg)))
 	   
 (require 'evil)
+(evilnc-default-hotkeys)
+
 (require 'neotree)
+(global-set-key [f8] 'neotree-toggle)
+
+;; Elpy
+(elpy-enable)
+(elpy-use-ipython)
+(remove-hook 'elpy-modules 'elpy-module-highlight-indentation)
+(require 'py-autopep8)
+(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+(when (require 'flycheck nil t)
+  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+  (add-hook 'elpy-mode-hook 'flycheck-mode))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -35,7 +54,12 @@
  '(global-evil-matchit-mode t)
  '(global-evil-surround-mode t)
  '(global-linum-mode t)
- '(inhibit-startup-screen t))
+ '(inhibit-startup-screen t)
+ '(initial-scratch-message ";; Happy coding! ^_^
+")
+ '(package-selected-packages
+   (quote
+    (flycheck py-autopep8 elpy conda py-import-check neotree multiple-cursors evil-surround evil-nerd-commenter evil-matchit evil-args))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -48,6 +72,3 @@
 (set-frame-font "Inconsolata-15" nil t)
 
 (fset 'yes-or-no-p 'y-or-n-p)
-
-(global-set-key [f8] 'neotree-toggle)
-(evilnc-default-hotkeys)

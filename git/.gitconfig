@@ -1,0 +1,15 @@
+[user]
+    name = Katherine Surta
+    email = kate.surta@gmail.com
+[core]
+    autocrlf = input
+    safecrlf = true
+    editor = vim
+    excludesfile = ~/.gitignore_global
+[alias]
+    hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+    type = cat-file -t
+    dump = cat-file -p
+[cola]
+    spellcheck = false
+
