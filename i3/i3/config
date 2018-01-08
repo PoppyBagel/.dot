@@ -196,7 +196,7 @@ exec --no-startup-id xcompmgr -c
 bindsym $mod+Shift+w exec chromium
 bindsym $mod+Shift+m exec qmmp
 bindsym $mod+Shift+f exec pcmanfm
-bindsym $mod+Shift+x exec i3lock -i ~/.config/i3/bg/lock.png
+bindsym $mod+Shift+x exec i3lock -i ~/.config/i3/bg/main.png
 bindsym F10 exec tilix --quake
 
 # Start some applications on specific workspaces
