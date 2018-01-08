@@ -10,18 +10,19 @@
   (package-refresh-contents))
 
 (dolist
-    (pkg '(conda
-	   elpy
-	   evil
-	   evil-args
-	   evil-matchit
-	   evil-nerd-commenter
-	   evil-surround
-	   flycheck
-	   multiple-cursors
-	   neotree
-	   py-autopep8
-	   py-import-check))
+    (pkg '(
+      elpy
+      evil
+      evil-args
+      evil-matchit
+      evil-nerd-commenter
+      evil-surround
+      flycheck
+      ipython
+      multiple-cursors
+      neotree
+      py-autopep8
+      py-import-check))
   (unless (package-installed-p pkg)
     (package-install pkg)))
 	   
@@ -33,10 +34,14 @@
 
 ;; Elpy
 (elpy-enable)
+(pyvenv-activate (expand-file-name "~/.anaconda3/envs/default-py3"))
 (elpy-use-ipython)
+(setq elpy-rpc-backend "jedi")
 (remove-hook 'elpy-modules 'elpy-module-highlight-indentation)
+
 (require 'py-autopep8)
 (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+
 (when (require 'flycheck nil t)
   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
   (add-hook 'elpy-mode-hook 'flycheck-mode))
@@ -55,11 +60,11 @@
  '(global-evil-surround-mode t)
  '(global-linum-mode t)
  '(inhibit-startup-screen t)
- '(initial-scratch-message ";; Happy coding! ^_^
-")
+ '(initial-scratch-message ";; Happy coding! ^_^")
  '(package-selected-packages
    (quote
-    (flycheck py-autopep8 elpy conda py-import-check neotree multiple-cursors evil-surround evil-nerd-commenter evil-matchit evil-args))))
+    (ipython flycheck py-autopep8 elpy py-import-check neotree multiple-cursors evil-surround evil-nerd-commenter evil-matchit evil-args)))
+ '(tool-bar-mode nil))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
