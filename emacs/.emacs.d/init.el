@@ -11,6 +11,7 @@
 
 (dolist
     (pkg '(
+      dockerfile-mode
       elpy
       evil
       evil-args
@@ -22,7 +23,9 @@
       multiple-cursors
       neotree
       py-autopep8
-      py-import-check))
+      py-import-check
+      terraform-mode
+      yaml-mode ))
   (unless (package-installed-p pkg)
     (package-install pkg)))
 	   
@@ -35,7 +38,6 @@
 ;; Elpy
 (elpy-enable)
 (pyvenv-activate (expand-file-name "~/.anaconda3/envs/default-py3"))
-(elpy-use-ipython)
 (setq elpy-rpc-backend "jedi")
 (remove-hook 'elpy-modules 'elpy-module-highlight-indentation)
 
@@ -63,7 +65,7 @@
  '(initial-scratch-message ";; Happy coding! ^_^")
  '(package-selected-packages
    (quote
-    (ipython flycheck py-autopep8 elpy py-import-check neotree multiple-cursors evil-surround evil-nerd-commenter evil-matchit evil-args)))
+    (dockerfile-mode terraform-mode yaml-mode ipython flycheck elpy py-import-check neotree multiple-cursors evil-surround evil-nerd-commenter evil-matchit evil-args)))
  '(tool-bar-mode nil))
 
 (custom-set-faces
@@ -75,5 +77,6 @@
 
 (set-face-attribute 'default nil :font "Inconsolata-15")
 (set-frame-font "Inconsolata-15" nil t)
+(setq-default indent-tabs-mode nil)
 
 (fset 'yes-or-no-p 'y-or-n-p)
