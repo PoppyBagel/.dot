@@ -4,16 +4,15 @@ export TERM=xterm-256color
 
 ZSH_THEME="bira"
 
-# Uncomment the following line to use case-sensitive completion.
+# Use case-sensitive completion.
 CASE_SENSITIVE="false"
 
-plugins=(git,colored-man-pages,gitignore,vagrant)
+plugins=(git,colored-man-pages,gitignore)
 
 function source-if-exist { [ -e "$1" ] && source "$1" }
 
 source-if-exist "$ZSH/oh-my-zsh.sh"
 
-# User configuration
 export PATH="$HOME/.anaconda3/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
@@ -24,9 +23,6 @@ setopt autocd
 export EDITOR="vim"
 _comp_options+=(globdots)
 zstyle ':completion:*' menu select
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"

@@ -102,7 +102,7 @@ bindsym $mod+1 workspace 1:www
 bindsym $mod+2 workspace 2:term
 bindsym $mod+3 workspace 3:code
 bindsym $mod+4 workspace 4:fm
-bindsym $mod+5 workspace 5:media
+bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
@@ -117,7 +117,7 @@ bindsym $mod+Shift+1 move container to workspace 1:www
 bindsym $mod+Shift+2 move container to workspace 2:term
 bindsym $mod+Shift+3 move container to workspace 3:code
 bindsym $mod+Shift+4 move container to workspace 4:fm
-bindsym $mod+Shift+5 move container to workspace 5:media
+bindsym $mod+Shift+5 move container to workspace 5
 bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
@@ -162,47 +162,29 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-    status_command py3status
-    position top
-    
-    colors {
-        # Whole color settings
-        background #201A23
-        statusline #FFFFFF
-        separator  #666666
-    
-        # Type             border  background font
-        focused_workspace  #201A23 #3F186F #FBFBFB
-        inactive_workspace #2E2532 #2E2532 #888888
-        urgent_workspace   #2E2532 #3399F0 #FBFBFB
-    }
-}
-
-# class                 border  backgr. text    indicator child_border
-client.focused          #201A23 #3F186F #FBFBFB #2E9EF4   #3F186F
-#client.focused_inactive #333333 #222222 #FBFBFB #484E50   #007FFF
-#client.unfocused        #333333 #222222 #888888 #292D2E   #888888
-#client.urgent           #2F343A #900000 #FFFFFF #900000   #900000
-#client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 
 # Autostart apps
-exec --no-startup-id nm-applet
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id feh --bg-fill ~/.config/i3/bg/main.png
-exec --no-startup-id xcompmgr -c
+exec --no-startup-id telegram-desktop -startintray
+# exec --no-startup-id keyledsd -c ~/.dots/keyleds/keyledsd.conf -q
+# exec --no-startup-id nm-applet
+# exec --no-startup-id xcompmgr -c
 
-bindsym $mod+Shift+w exec chromium
+
+# bindsym $mod+Shift+w exec chromium
+bindsym $mod+Shift+w exec firefox
 bindsym $mod+Shift+m exec qmmp
 bindsym $mod+Shift+f exec pcmanfm
 bindsym $mod+Shift+x exec i3lock -i ~/.config/i3/bg/main.png
 bindsym F10 exec tilix --quake
 
+
 # Start some applications on specific workspaces
-assign [class="Chromium"] 1:www
+assign [class="Firefox"] 1:www
+assign [class="Emacs"] 3:code
 assign [class="Pcmanfm"] 4:fm
-assign [class="Qmmp"] 5:media
+assign [class="Telegram"] 6
 
 for_window [class="Gsimplecal"] floating enable, move position mouse, move down 25 px
 

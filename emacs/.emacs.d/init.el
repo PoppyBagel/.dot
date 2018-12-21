@@ -92,8 +92,8 @@
  '(sml/vc ((t (:inherit sml/git :background "grey40" :foreground "CadetBlue1"))))
  '(sml/vc-edited ((t (:inherit sml/prefix :background "gray40" :foreground "RosyBrown1")))))
 
-(set-face-attribute 'default nil :font "Inconsolata-15")
-(set-frame-font "Inconsolata-15" nil t)
+(set-face-attribute 'default nil :font "Inconsolata-13")
+(set-frame-font "Inconsolata-13" nil t)
 (setq-default indent-tabs-mode nil)
 
 (fset 'yes-or-no-p 'y-or-n-p)
