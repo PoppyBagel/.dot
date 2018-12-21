@@ -31,3 +31,7 @@ zstyle ':completion:*' menu select
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 source-if-exist "$HOME/.aliases"
+
+if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+    source /etc/profile.d/vte.sh
+fi
