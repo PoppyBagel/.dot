@@ -35,8 +35,11 @@ bindsym $mod+Return exec tilix
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+# start rofi as a program launcher
+bindsym $mod+d exec rofi -show drun
+
+# start rofi as a window switcher
+bindsym $mod+Tab exec rofi -show window
 
 # change focus
 bindsym $mod+$left focus left
@@ -162,6 +165,8 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# class        border   backgr. text   indicator child_border
+client.focused #201A23 #201A23 #FBFBFB #2E9EF4 #201A23
 
 # Autostart apps
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
