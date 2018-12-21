@@ -7,7 +7,12 @@ ZSH_THEME="bira"
 # Use case-sensitive completion.
 CASE_SENSITIVE="false"
 
-plugins=(git,colored-man-pages,gitignore)
+plugins=(
+    colored-man-pages
+    git
+    gitignore
+    systemd
+)
 
 function source-if-exist { [ -e "$1" ] && source "$1" }
 
