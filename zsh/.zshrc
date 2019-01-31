@@ -4,7 +4,7 @@ export TERM=xterm-256color
 
 ZSH_THEME="bira"
 
-# Use case-sensitive completion.
+# Use case-insensitive completion.
 CASE_SENSITIVE="false"
 
 plugins=(
@@ -18,8 +18,9 @@ function source-if-exist { [ -e "$1" ] && source "$1" }
 
 source-if-exist "$ZSH/oh-my-zsh.sh"
 
-export PATH="$HOME/.anaconda3/bin:$PATH"
+export NOANAPATH=$PATH
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.anaconda3/bin:$PATH"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
