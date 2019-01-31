@@ -43,5 +43,12 @@ fi
 #exec xterm -geometry 80x66+0+0 -name login
 
 setxkbmap -layout us,ru -option grp:alt_shift_toggle
-exec i3
 
+# turn off the laptop screen if an external monitor connected
+ hdmi_connected=$(xrandr | grep ' connected' | grep 'HDMI' | awk '{print $1}')
+
+if [ hdmi_connected ]; then
+   xrandr --output eDP-1 --off
+fi
+
+exec i3
