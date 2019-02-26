@@ -18,8 +18,15 @@ function source-if-exist { [ -e "$1" ] && source "$1" }
 
 source-if-exist "$ZSH/oh-my-zsh.sh"
 
-export PATH="$HOME/.anaconda3/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+export NOANAPATH=$PATH
+export PATH="$HOME/.anaconda3/bin:$PATH"
+
+export PIPENV_VENV_IN_PROJECT=true
+
+# Apache Airflow env
+export SLUGIFY_USES_TEXT_UNIDECODE="yes"
+export AIRFLOW_HOME="$HOME/.airflow"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -40,3 +47,8 @@ source-if-exist "$HOME/.aliases"
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
     source /etc/profile.d/vte.sh
 fi
+
+export PATH="/home/rcat/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
