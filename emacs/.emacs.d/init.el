@@ -1,8 +1,7 @@
 (require 'package)
 (setcdr (last package-archives)
 	'(("marmalade" . "http://marmalade-repo.org/packages/")
-	  ("melpa" . "http://melpa.org/packages/")
-	  ("elpy" . "https://jorgenschaefer.github.io/packages/")))
+	  ("melpa" . "http://melpa.org/packages/")))
 
 (package-initialize)
 
@@ -12,18 +11,12 @@
 (dolist
     (pkg '(
       dockerfile-mode
-      elpy
       evil
-      evil-args
       evil-matchit
       evil-nerd-commenter
-      evil-surround
       flycheck
-      ipython
       multiple-cursors
       neotree
-      py-autopep8
-      py-import-check
       smart-mode-line
       smart-mode-line-powerline-theme
       terraform-mode
@@ -37,18 +30,24 @@
 (require 'neotree)
 (global-set-key [f8] 'neotree-toggle)
 
-;; Elpy
-(elpy-enable)
-(pyvenv-activate (expand-file-name "~/.anaconda3/envs/default-py3"))
-(setq elpy-rpc-backend "jedi")
-(remove-hook 'elpy-modules 'elpy-module-highlight-indentation)
+(require 'projectile)
+(projectile-mode t)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
-(require 'py-autopep8)
-(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
+;; Python environments
+(add-hook 'python-mode-hook #'pipenv-mode)
 
-(when (require 'flycheck nil t)
-  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-  (add-hook 'elpy-mode-hook 'flycheck-mode))
+;; (require 'pyenv-mode)
+;; (pyenv-mode)
+
+;; (defun projectile-pyenv-mode-set ()
+;;   "Set pyenv version matching project name."
+;;   (let ((project (projectile-project-name)))
+;;     (if (member project (pyenv-mode-versions))
+;;         (pyenv-mode-set project)
+;;       (pyenv-mode-unset))))
+
+;; (add-hook 'projectile-after-switch-project-hook 'projectile-pyenv-mode-set)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -63,13 +62,12 @@
     ("84d2f9eeb3f82d619ca4bfffe5f157282f4779732f48a5ac1484d94d5ff5b279" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
  '(evil-mode t)
  '(global-evil-matchit-mode t)
- '(global-evil-surround-mode t)
  '(global-linum-mode t)
  '(inhibit-startup-screen t)
  '(initial-scratch-message ";; Happy coding! ^_^")
  '(package-selected-packages
    (quote
-    (smart-mode-line smart-mode-line-powerline-theme dockerfile-mode terraform-mode yaml-mode ipython flycheck elpy py-import-check neotree multiple-cursors evil-surround evil-nerd-commenter evil-matchit evil-args)))
+    (pipenv blacken magit projectile pyenv-mode smart-mode-line smart-mode-line-powerline-theme dockerfile-mode terraform-mode yaml-mode flycheck neotree multiple-cursors evil evil-nerd-commenter evil-matchit)))
  '(show-trailing-whitespace t)
  '(sml/theme (quote powerline))
  '(tool-bar-mode nil))
