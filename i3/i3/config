@@ -36,6 +36,7 @@ bindsym $mod+Return exec tilix
 bindsym $mod+Shift+q kill
 
 # start rofi as a program launcher
+
 bindsym $mod+d exec rofi -show drun
 
 # start rofi as a window switcher
@@ -101,10 +102,10 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 # switch to workspace
-bindsym $mod+1 workspace 1:www
-bindsym $mod+2 workspace 2:term
-bindsym $mod+3 workspace 3:code
-bindsym $mod+4 workspace 4:fm
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
 bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
@@ -114,12 +115,19 @@ bindsym $mod+0 workspace 10
 bindsym $mod+b workspace back_and_forth
 
 workspace_auto_back_and_forth yes
+workspace 1 output HDMI-2
+workspace 2 output HDMI-2 HDMI-1
+workspace 3 output primary
+workspace 4 output HDMI-2
+workspace 5 output HDMI-1
+workspace 6 output HDMI-2
+workspace 7 output HDMI-2
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1:www
-bindsym $mod+Shift+2 move container to workspace 2:term
-bindsym $mod+Shift+3 move container to workspace 3:code
-bindsym $mod+Shift+4 move container to workspace 4:fm
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
 bindsym $mod+Shift+5 move container to workspace 5
 bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
@@ -133,7 +141,6 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # Screen brightness controls with notification
 bindsym XF86MonBrightnessUp exec "light -A 5; notify-send 'brightness up'"
@@ -169,11 +176,12 @@ bindsym $mod+r mode "resize"
 client.focused #201A23 #201A23 #FBFBFB #2E9EF4 #201A23
 
 # Autostart apps
+exec_always --no-startup-id xrandr --output HDMI-1 --right-of HDMI-2 --auto
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id feh --bg-fill ~/.config/i3/bg/main.png
 exec --no-startup-id telegram-desktop -startintray
-# exec --no-startup-id keyledsd -c ~/.dots/keyleds/keyledsd.conf -q
 # exec --no-startup-id nm-applet
+# exec --no-startup-id keyledsd -c ~/.dots/keyleds/keyledsd.conf -q
 # exec --no-startup-id xcompmgr -c
 
 
@@ -181,17 +189,18 @@ exec --no-startup-id telegram-desktop -startintray
 bindsym $mod+Shift+w exec firefox
 bindsym $mod+Shift+m exec qmmp
 bindsym $mod+Shift+f exec pcmanfm
+bindsym $mod+Shift+e exec emacs
 bindsym $mod+Shift+x exec i3lock -i ~/.config/i3/bg/main.png
 bindsym F10 exec tilix --quake
 
 
 # Start some applications on specific workspaces
-assign [class="Firefox"] 1:www
-assign [class="Emacs"] 3:code
-assign [class="Pcmanfm"] 4:fm
+assign [class="Firefox"] 1
+assign [class="Emacs"] 3
+assign [class="Pcmanfm"] 4
 assign [class="Telegram"] 6
 
 for_window [class="Gsimplecal"] floating enable, move position mouse, move down 25 px
 
 new_window pixel
-hide_edge_borders both
+hide_edge_borders smart
