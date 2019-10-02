@@ -43,7 +43,7 @@ font-5 = Font Awesome 5 Brands:pixelsize=12;1
 
 modules-left = i3
 modules-center =
-modules-right = date powermenu alsa xkeyboard
+modules-right = date alsa xkeyboard bat0 bat1
 
 tray-position = right
 tray-padding = 2
@@ -317,4 +317,31 @@ screenchange-reload = true
 margin-top = 5
 margin-bottom = 5
 
-; vim:ft=dosini
+[module/bat1]
+type = internal/battery
+
+; This is useful in case the battery never reports 100% charge
+full-at = 99
+
+; Use the following command to list batteries and adapters:
+; $ ls -1 /sys/class/power_supply/
+battery = BAT1
+adapter = AC
+
+; If an inotify event haven't been reported in this many
+; seconds, manually poll for new values.
+;
+; Needed as a fallback for systems that don't report events
+; on sysfs/procfs.
+;
+; Disable polling by setting the interval to 0.
+;
+; Default: 5
+poll-interval = 5
+
+[module/bat0]
+type = internal/battery
+
+full-at = 99
+battery = BAT0
+poll-interval = 5
