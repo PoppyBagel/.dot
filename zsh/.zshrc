@@ -19,6 +19,7 @@ function source-if-exist { [ -e "$1" ] && source "$1" }
 source-if-exist "$ZSH/oh-my-zsh.sh"
 
 export PATH="$HOME/.local/bin:$PATH"
+export PYTHONBREAKPOINT="pudb.set_trace"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
