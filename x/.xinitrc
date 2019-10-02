@@ -44,10 +44,10 @@ fi
 
 setxkbmap -layout us,ru -option grp:alt_shift_toggle
 
-# turn off the laptop screen if an external monitor connected
- hdmi_connected=$(xrandr | grep ' connected' | grep 'HDMI' | awk '{print $1}')
+hdmi_connected=$(xrandr | grep ' connected' | grep 'HDMI' | awk '{print $1}')
 
-if [ hdmi_connected ]; then
+# turn off the laptop screen if an external monitor connected
+if [ ! -z "$hdmi_connected" ]; then
    xrandr --output eDP-1 --off
 fi
 
