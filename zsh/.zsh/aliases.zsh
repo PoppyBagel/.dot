@@ -1,4 +1,3 @@
-alias sys='sudo systemctl'
 alias pacman='pacman --color=auto'
 alias grep='grep --color=auto'
 alias diff='diff --color=auto'
